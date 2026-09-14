@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0
+- Neutral default icon (a generic save mark) so installers no longer inherit the author's Townie.
+- Onboarding now guides you to set your own Townie as the toolbar icon, including where to find your Townie image.
+- "Reset to default" replaces "Reset to Star".
+
 ## 4.0.0
 - Send all open tabs in the current window (button + Ctrl/Cmd+Shift+E).
 - Collection routing: choose a target Content Library collection per capture, or Auto.

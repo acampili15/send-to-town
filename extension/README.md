@@ -20,7 +20,7 @@ A green **OK** badge means it went through; a red **ERR** (or **SET** if unconfi
 
 - **Webhook URL / Secret** -- from the routine. **Test connection** fires a harmless ping.
 - **Collections** -- comma-separated list shown in the popup's "File into" menu. A default selection is optional.
-- **Your Townie icon** -- paste a Townie image URL or upload a PNG; the toolbar button becomes your Townie. **Reset to Star** restores the default.
+- **Your Townie icon** -- the extension ships with a neutral default icon. To use your own: open your [Town assistant settings](https://www.town.com/settings/assistant/personality), save your Townie's image, and upload it here (or paste its URL). **Reset to default** restores the neutral icon.
 
 ## Security note
 

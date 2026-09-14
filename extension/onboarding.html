@@ -24,6 +24,7 @@
     .icon-preview { width: 48px; height: 48px; border: 1px solid #e2e8f0; border-radius: 8px; object-fit: contain; background: #fff; }
     kbd { background: #f1f5f9; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; font-size: 12px; }
     ul { margin: 6px 0; padding-left: 20px; }
+    .card.highlight { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
   </style>
 </head>
 <body>
@@ -56,9 +57,10 @@
     <p class="hint">Comma-separated. You can always leave a capture on &ldquo;Auto&rdquo; and let Star decide.</p>
   </div>
 
-  <div class="card">
-    <h2><span class="num">4</span> Make it yours</h2>
-    <p class="hint">Turn the toolbar button into your own Townie. Paste your Townie image URL or upload one.</p>
+  <div class="card highlight">
+    <h2><span class="num">4</span> Make the icon your Townie</h2>
+    <p class="hint">The toolbar button ships with a neutral default. Make it <strong>your</strong> Townie so your captures feel like yours.</p>
+    <p class="hint"><strong>Where to find your Townie image:</strong> open your <a href="https://www.town.com/settings/assistant/personality" target="_blank">Town assistant settings</a>, save your Townie's picture, then upload it below (or paste a direct image URL if you have one).</p>
     <div class="icon-row">
       <img id="iconPreview" class="icon-preview" src="icons/icon-48.png" alt="" />
       <div style="flex:1;">
@@ -66,7 +68,7 @@
         <div style="margin-top:8px;"><input id="iconFile" type="file" accept="image/png,image/jpeg,image/webp" /></div>
       </div>
     </div>
-    <button id="applyIcon" class="secondary">Use this icon</button>
+    <button id="applyIcon">Use my Townie as the icon</button>
   </div>
 
   <div class="card">

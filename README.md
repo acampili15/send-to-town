@@ -13,7 +13,7 @@ extension/          The unpacked browser extension -- load THIS folder in Chrome
   popup.html/js     Toolbar popup: quick-action chips, note, collection routing, send buttons
   options.html/js   Settings: webhook URL + secret, Test connection, collections, Townie icon
   onboarding.html/js First-run setup guide (opens automatically on install)
-  icons/            Default Star icon set (16/32/48/128 + 512 master)
+  icons/            Neutral default icon set (16/32/48/128 + 512 master)
 routine/            Spec + contract for the Town-side Web Capture Inbox processor routine
 skill/              Claude skill companion for iterating on this repo with a coding agent
 ```
@@ -31,7 +31,7 @@ skill/              Claude skill companion for iterating on this repo with a cod
 - **Quick-action chips** -- one tap for Summarize / Read later / Add todo / Reference instead of typing.
 - **Keyboard shortcuts** -- Ctrl/Cmd+Shift+S (page), Ctrl/Cmd+Shift+E (all tabs); editable at chrome://extensions/shortcuts.
 - **Test connection** -- verify your webhook right from Settings.
-- **Real icons** + **your Townie as the icon** -- set any Townie image as the toolbar button.
+- **Neutral default icon, personalized to your Townie** -- ships with a generic save mark; each installer sets their own Townie as the toolbar button.
 - **Guided onboarding** -- a first-run wizard so anyone can set it up, not just the person who built it.
 - Richer metadata (author, publish date, canonical URL) and right-click **Send this link to Star**.
 

@@ -50,7 +50,7 @@ document.getElementById("resetIcon").addEventListener("click", async () => {
   await chrome.storage.local.remove("townieIconDataUrl");
   document.getElementById("iconPreview").src = "icons/icon-48.png";
   await chrome.runtime.sendMessage({ type: "resetIcon" });
-  const t = document.getElementById("saved"); t.textContent = "Icon reset to Star."; t.className = "ok";
+  const t = document.getElementById("saved"); t.textContent = "Icon reset to default."; t.className = "ok";
   setTimeout(() => (t.textContent = ""), 2000);
 });
 
