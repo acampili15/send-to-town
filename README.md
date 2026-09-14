@@ -19,6 +19,7 @@ extension/          The unpacked browser extension -- load THIS folder in Chrome
   icons/            Neutral default icon set (16/32/48/128 + 512 master)
 routine/            Spec + contract for the Town-side Web Capture Inbox processor routine
 skill/              Claude skill companion for iterating on this repo with a coding agent
+town-setup-skill/   Town setup skill: import it and your Townie creates the routine + guides setup
 ```
 
 ## Quick start (for yourself)
@@ -40,7 +41,7 @@ skill/              Claude skill companion for iterating on this repo with a cod
 
 ## Sharing it with other Town users
 
-The extension is the same for everyone; each person needs their own processor routine + webhook secret. Package the Web Capture Inbox as a Town **Installable Routine** so others can install it in a click, then point them at this extension. See `routine/web-capture-inbox.md`.
+The extension is the same for everyone; each person needs their own processor routine + webhook secret. Package the Web Capture Inbox as a Town **Installable Routine** so others can install it in a click, then point them at this extension. See `routine/web-capture-inbox.md`. No team? Share the setup skill in `town-setup-skill/` instead: a Town user imports it and their own assistant creates the routine and walks them through the rest.
 
 ## License
 

@@ -1,6 +1,7 @@
 # Changelog
 
 ## 4.1.0
+- Added a Town setup skill (town-setup-skill/): import it and your Townie creates the Web Capture Inbox routine, then guides you through the webhook, extension load, and test.
 - Added SETUP.md: a self-serve setup guide with the copy-paste routine prompt and step-by-step for the routine + extension.
 - Renamed the extension to "Send to Town" across the UI, code, and docs.
 - Neutral default icon (a generic save mark) so installers no longer inherit the author's Townie.
