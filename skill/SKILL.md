@@ -1,0 +1,54 @@
+---
+name: send-to-star
+description: Build and iterate on the "Send to Star" browser extension and its Town Web Capture Inbox processor routine. Use when editing the extension (manifest, background, popup, options, onboarding), changing the webhook payload contract, packaging the routine for other users, or coordinating the collector -> processor architecture.
+---
+
+# Send to Star -- project companion
+
+A Manifest V3 browser extension (the *collector*) plus a webhook-triggered Town routine (the *processor*). The extension captures a page / selection / all open tabs from the user's logged-in browser and POSTs a small JSON payload to the routine's webhook, which classifies, summarizes, and files each item into the Town Content Library.
+
+## Architecture
+
+collector (browser, this repo's `extension/`) -> HTTPS POST -> processor (Town routine, `routine/web-capture-inbox.md`) -> Content Library.
+
+Design principle from the original spec: **be loose upstream, smart downstream** -- over-capture in the browser, let the routine's reasoning be the discerning relevance filter.
+
+## File map (`extension/`)
+
+- `manifest.json` -- MV3. Permissions: activeTab, scripting, contextMenus, storage; host_permissions https://*/*. Declares icons, options_page, background service worker, and two `commands` (capture-page, capture-all-tabs).
+- `background.js` -- service worker. Key functions: `extractPageData` (injected into the tab), `sendCapture` (page / selection / link), `sendAllTabs` (batch), `testConnection`, `applyTownieIcon` (OffscreenCanvas -> chrome.action.setIcon), `buildPayload`. Wires context menus, commands, storage changes, and runtime messages.
+- `popup.html` / `popup.js` -- quick-action chips, note field, "File into" collection select, three send buttons.
+- `options.html` / `options.js` -- webhook URL + secret, Test connection, collections list + default, Townie icon set/reset.
+- `onboarding.html` / `onboarding.js` -- first-run guided setup (opens on install). Reuses the same test/icon/save handlers.
+- `icons/` -- default Star icon set.
+
+## State (chrome.storage)
+
+- `sync`: `webhookUrl`, `webhookSecret`, `collections` (string[]), `defaultCollection`.
+- `local`: `townieIconDataUrl` (data URL of the user's Townie icon; applied via setIcon).
+
+## Payload contract
+
+See `routine/web-capture-inbox.md`. Keep the extension and routine in lockstep whenever you add or rename a field. `kind` is one of web_capture, web_capture_batch, web_capture_link, connection_test.
+
+## Build / test loop
+
+- No build step -- it's plain JS/HTML. Load `extension/` unpacked at `chrome://extensions` (Developer mode).
+- After editing the service worker, click the extension's **reload** icon.
+- Validate before committing: `node --check extension/*.js` and JSON-parse `manifest.json`.
+- Test connection with the Settings button before real captures; watch the toolbar badge (OK / ERR / SET / count).
+
+## Conventions
+
+- Vanilla JS, no dependencies, no bundler. Keep permissions minimal (matters for the Chrome Web Store review).
+- Never hardcode one user's collections or secret -- everything user-specific lives in storage and the options/onboarding UI.
+- Bump `version` in `manifest.json` and add a `CHANGELOG.md` entry per release.
+
+## Roadmap / good next tasks
+
+- Offline queue + retry when a POST fails.
+- Recent-captures list in the popup.
+- Readability-based extraction; screenshot capture for dashboards.
+- Dwell/scroll heuristics with optional auto-capture.
+- Chrome Web Store packaging (privacy policy, host-permission justification).
+- Firefox support (browser_specific_settings).

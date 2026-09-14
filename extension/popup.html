@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { font: 13px/1.4 -apple-system, Segoe UI, Roboto, sans-serif; width: 300px; margin: 0; padding: 14px; color: #111; }
+    h1 { font-size: 14px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+    h1 img { width: 18px; height: 18px; }
+    label { display: block; font-size: 11px; color: #475569; font-weight: 600; margin: 10px 0 3px; text-transform: uppercase; letter-spacing: .02em; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { border: 1px solid #cbd5e1; background: #fff; border-radius: 999px; padding: 4px 10px; font-size: 12px; cursor: pointer; user-select: none; }
+    .chip.on { background: #2563eb; border-color: #2563eb; color: #fff; }
+    textarea, select { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px; }
+    textarea { height: 44px; resize: vertical; }
+    button { width: 100%; padding: 8px; margin-top: 8px; border: 0; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .primary { background: #2563eb; color: #fff; }
+    .secondary { background: #eef2f7; color: #111; }
+    .ghost { background: #fff; color: #2563eb; border: 1px solid #dbeafe; }
+    #status { min-height: 16px; font-size: 12px; margin-top: 8px; }
+    .ok { color: #15803d; } .err { color: #b91c1c; }
+    .row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+    a { font-size: 12px; color: #2563eb; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1><img id="brand" src="icons/icon-48.png" alt="" /> Send to Star</h1>
+
+  <label>Quick actions</label>
+  <div class="chips" id="chips">
+    <span class="chip" data-tag="summarize">Summarize</span>
+    <span class="chip" data-tag="read later">Read later</span>
+    <span class="chip" data-tag="add a todo">Add todo</span>
+    <span class="chip" data-tag="save as reference">Reference</span>
+  </div>
+
+  <label>Note (optional)</label>
+  <textarea id="note" placeholder="Anything to tell Star..."></textarea>
+
+  <label>File into</label>
+  <select id="collection"></select>
+
+  <button id="send-page" class="primary">Send this page</button>
+  <button id="send-selection" class="secondary">Send highlighted text only</button>
+  <button id="send-all" class="ghost">Send all open tabs</button>
+
+  <div id="status"></div>
+  <div class="row">
+    <a href="#" id="open-options">Settings</a>
+    <a href="#" id="open-onboarding">Setup guide</a>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { font: 14px/1.5 -apple-system, Segoe UI, Roboto, sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; color: #111; }
+    h1 { font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    h1 img { width: 24px; height: 24px; }
+    label { display: block; font-weight: 600; margin: 16px 0 4px; }
+    input[type=text], input[type=password] { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .hint { color: #475569; font-size: 13px; }
+    button { margin-top: 18px; padding: 9px 16px; border: 0; border-radius: 6px; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; }
+    button.secondary { background: #eef2f7; color: #111; }
+    #saved, #tested { margin-left: 10px; font-size: 13px; }
+    .ok { color: #15803d; } .err { color: #b91c1c; }
+    .icon-row { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+    .icon-preview { width: 48px; height: 48px; border: 1px solid #e2e8f0; border-radius: 8px; object-fit: contain; background: #fff; }
+    .divider { border: 0; border-top: 1px solid #e2e8f0; margin: 26px 0; }
+  </style>
+</head>
+<body>
+  <h1><img id="brand" src="icons/icon-48.png" alt="" /> Send to Star &mdash; settings</h1>
+
+  <label for="url">Webhook URL</label>
+  <input id="url" type="text" placeholder="https://.../workflow-webhooks/whk_..." />
+  <label for="secret">Secret (bearer token)</label>
+  <input id="secret" type="password" placeholder="whsec_..." />
+  <p class="hint">From your Web Capture Inbox routine in Town &rarr; Config &rarr; Webhook &rarr; Enable.</p>
+  <div><button id="test" class="secondary">Test connection</button><span id="tested"></span></div>
+
+  <hr class="divider" />
+  <label for="collections">Collections to file into</label>
+  <input id="collections" type="text" placeholder="reading, captures, social, personal" />
+  <p class="hint">Comma-separated. These appear in the popup's &ldquo;File into&rdquo; menu. Leave a capture on &ldquo;Auto&rdquo; to let Star decide.</p>
+  <label for="defaultCollection">Default selection</label>
+  <input id="defaultCollection" type="text" placeholder="(blank = Auto)" />
+
+  <hr class="divider" />
+  <label>Your Townie icon</label>
+  <p class="hint">Make the toolbar button your own Townie. Paste your Townie image URL or upload a PNG. Leave blank to keep the default Star.</p>
+  <div class="icon-row">
+    <img id="iconPreview" class="icon-preview" src="icons/icon-48.png" alt="" />
+    <div style="flex:1;">
+      <input id="iconUrl" type="text" placeholder="https://.../your-townie.png" />
+      <div style="margin-top:8px;"><input id="iconFile" type="file" accept="image/png,image/jpeg,image/webp" /></div>
+    </div>
+  </div>
+  <div><button id="applyIcon" class="secondary">Use this icon</button> <button id="resetIcon" class="secondary">Reset to Star</button></div>
+
+  <hr class="divider" />
+  <div><button id="save">Save settings</button><span id="saved"></span></div>
+
+  <script src="options.js"></script>
+</body>
+</html>

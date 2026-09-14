@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Set up Send to Star</title>
+  <style>
+    body { font: 15px/1.6 -apple-system, Segoe UI, Roboto, sans-serif; max-width: 640px; margin: 0 auto; padding: 40px 20px 80px; color: #0f172a; }
+    header { text-align: center; }
+    header img { width: 64px; height: 64px; }
+    h1 { font-size: 24px; margin: 8px 0 4px; }
+    .sub { color: #475569; margin-top: 0; }
+    .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; margin: 18px 0; }
+    .card h2 { font-size: 16px; margin: 0 0 6px; display: flex; align-items: center; gap: 10px; }
+    .num { display: inline-flex; width: 24px; height: 24px; border-radius: 999px; background: #2563eb; color: #fff; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+    label { display: block; font-weight: 600; margin: 12px 0 4px; font-size: 13px; }
+    input[type=text], input[type=password] { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .hint { color: #475569; font-size: 13px; }
+    button { padding: 9px 16px; border: 0; border-radius: 6px; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; margin-top: 12px; }
+    button.secondary { background: #eef2f7; color: #0f172a; }
+    a.btn { display: inline-block; text-decoration: none; padding: 9px 16px; border-radius: 6px; background: #0f172a; color: #fff; font-weight: 600; margin-top: 6px; }
+    .status { font-size: 13px; margin-left: 8px; }
+    .ok { color: #15803d; } .err { color: #b91c1c; }
+    .icon-row { display: flex; align-items: center; gap: 14px; }
+    .icon-preview { width: 48px; height: 48px; border: 1px solid #e2e8f0; border-radius: 8px; object-fit: contain; background: #fff; }
+    kbd { background: #f1f5f9; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; font-size: 12px; }
+    ul { margin: 6px 0; padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <img id="brand" src="icons/icon-128.png" alt="" />
+    <h1>Welcome to Send to Star</h1>
+    <p class="sub">Capture a page, your highlight, or every open tab &mdash; your Townie sorts it into your Content Library.</p>
+  </header>
+
+  <div class="card">
+    <h2><span class="num">1</span> Add the Web Capture Inbox routine</h2>
+    <p class="hint">This is the Town routine that receives your captures, classifies them, and files them. Install it once, then enable its webhook.</p>
+    <a class="btn" id="installRoutine" href="https://www.town.com/routines" target="_blank">Open Town routines</a>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">2</span> Connect your webhook</h2>
+    <p class="hint">In the routine's <strong>Config &rarr; Webhook</strong>, click <strong>Enable</strong>, then paste the URL and secret here.</p>
+    <label for="url">Webhook URL</label>
+    <input id="url" type="text" placeholder="https://.../workflow-webhooks/whk_..." />
+    <label for="secret">Secret</label>
+    <input id="secret" type="password" placeholder="whsec_..." />
+    <div><button id="test" class="secondary">Test connection</button><span id="tested" class="status"></span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">3</span> Pick your collections</h2>
+    <label for="collections">Collections to file into</label>
+    <input id="collections" type="text" value="reading, captures, social, personal" />
+    <p class="hint">Comma-separated. You can always leave a capture on &ldquo;Auto&rdquo; and let Star decide.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">4</span> Make it yours</h2>
+    <p class="hint">Turn the toolbar button into your own Townie. Paste your Townie image URL or upload one.</p>
+    <div class="icon-row">
+      <img id="iconPreview" class="icon-preview" src="icons/icon-48.png" alt="" />
+      <div style="flex:1;">
+        <input id="iconUrl" type="text" placeholder="https://.../your-townie.png" />
+        <div style="margin-top:8px;"><input id="iconFile" type="file" accept="image/png,image/jpeg,image/webp" /></div>
+      </div>
+    </div>
+    <button id="applyIcon" class="secondary">Use this icon</button>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">5</span> You're set</h2>
+    <ul>
+      <li>Click the toolbar star, add an optional note or quick-action, and hit <strong>Send this page</strong>.</li>
+      <li>Highlight text and right-click &rarr; <strong>Send selection to Star</strong>.</li>
+      <li>Keyboard: <kbd>Ctrl/Cmd+Shift+S</kbd> sends the page, <kbd>Ctrl/Cmd+Shift+E</kbd> sends every open tab. Change these at <em>chrome://extensions/shortcuts</em>.</li>
+    </ul>
+    <button id="finish">Save &amp; finish</button><span id="saved" class="status"></span>
+  </div>
+
+  <script src="onboarding.js"></script>
+</body>
+</html>
