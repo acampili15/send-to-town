@@ -1,6 +1,7 @@
 # Changelog
 
 ## 4.1.0
+- Added SETUP.md: a self-serve setup guide with the copy-paste routine prompt and step-by-step for the routine + extension.
 - Renamed the extension to "Send to Town" across the UI, code, and docs.
 - Neutral default icon (a generic save mark) so installers no longer inherit the author's Townie.
 - Onboarding now guides you to set your own Townie as the toolbar icon, including where to find your Townie image.

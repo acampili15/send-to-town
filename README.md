@@ -1,5 +1,7 @@
 # Send to Town
 
+> New here? Start with **[SETUP.md](SETUP.md)** -- the full step-by-step (routine + extension), including the copy-paste routine prompt.
+
 A tiny browser extension that captures what you're reading -- a page, a highlight, or every open tab -- and sends it to your **Town** assistant, which classifies it, summarizes it, and files it into your Content Library. Capture happens in your logged-in browser session, so it works on content a server-side fetch can't reach (LinkedIn posts, gated articles).
 
 This is the *collector* half of a collector -> processor design. The *processor* half is a webhook-triggered Town routine (the **Web Capture Inbox**). The extension is generic: it just POSTs a small JSON payload to your routine's webhook.
@@ -7,6 +9,7 @@ This is the *collector* half of a collector -> processor design. The *processor*
 ## Repo layout
 
 ```
+SETUP.md            Start here: full setup guide (routine prompt + extension steps)
 extension/          The unpacked browser extension -- load THIS folder in Chrome/Edge.
   manifest.json     MV3 manifest (icons, keyboard shortcuts, options, background worker)
   background.js     Service worker: page extraction, single/selection/all-tabs capture, Townie icon
