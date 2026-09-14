@@ -1,4 +1,4 @@
-// Send to Star - background service worker (MV3)
+// Send to Town - background service worker (MV3)
 
 // Runs in the target tab to pull out the useful bits of the page.
 function extractPageData() {
@@ -179,7 +179,7 @@ async function testConnection(msg) {
     const resp = await fetch(url, {
       method: "POST",
       headers: { "Authorization": "Bearer " + secret, "Content-Type": "application/json", "X-Town-Idempotency-Key": "test-" + Date.now() },
-      body: JSON.stringify({ data: { source: "browser-extension", kind: "connection_test", note: "Test ping from the Send to Star extension.", capturedAt: new Date().toISOString() } })
+      body: JSON.stringify({ data: { source: "browser-extension", kind: "connection_test", note: "Test ping from the Send to Town extension.", capturedAt: new Date().toISOString() } })
     });
     if (resp.status === 202 || resp.ok) return { ok: true, status: resp.status };
     return { ok: false, status: resp.status, error: "Town returned " + resp.status + " (401/403 means the secret didn't match; 404 usually means a wrong or disabled secret)." };
@@ -206,7 +206,7 @@ async function applyTownieIcon() {
       imageData[size] = ctx.getImageData(0, 0, size, size);
     }
     await chrome.action.setIcon({ imageData });
-  } catch (e) { /* fall back to the packaged Star icon */ }
+  } catch (e) { /* fall back to the packaged default icon */ }
 }
 
 function resetIcon() {
@@ -215,9 +215,9 @@ function resetIcon() {
 
 // ---- wiring ----
 chrome.runtime.onInstalled.addListener((details) => {
-  chrome.contextMenus.create({ id: "star-send-selection", title: "Send selection to Star", contexts: ["selection"] });
-  chrome.contextMenus.create({ id: "star-send-page", title: "Send page to Star", contexts: ["page"] });
-  chrome.contextMenus.create({ id: "star-send-link", title: "Send this link to Star", contexts: ["link"] });
+  chrome.contextMenus.create({ id: "town-send-selection", title: "Send selection to Town", contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "town-send-page", title: "Send page to Town", contexts: ["page"] });
+  chrome.contextMenus.create({ id: "town-send-link", title: "Send this link to Town", contexts: ["link"] });
   applyTownieIcon();
   if (details && details.reason === "install") {
     chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
@@ -226,9 +226,9 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.runtime.onStartup.addListener(() => applyTownieIcon());
 
 chrome.contextMenus.onClicked.addListener((info) => {
-  if (info.menuItemId === "star-send-selection") sendCapture({ selectionOnly: true, selectionText: info.selectionText || "" });
-  else if (info.menuItemId === "star-send-page") sendCapture({ selectionOnly: false });
-  else if (info.menuItemId === "star-send-link") sendCapture({ linkUrl: info.linkUrl || "" });
+  if (info.menuItemId === "town-send-selection") sendCapture({ selectionOnly: true, selectionText: info.selectionText || "" });
+  else if (info.menuItemId === "town-send-page") sendCapture({ selectionOnly: false });
+  else if (info.menuItemId === "town-send-link") sendCapture({ linkUrl: info.linkUrl || "" });
 });
 
 chrome.commands.onCommand.addListener((command) => {

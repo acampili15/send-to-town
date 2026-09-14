@@ -1,6 +1,6 @@
 # Web Capture Inbox -- processor routine
 
-The Town-side half of Send to Star. A **webhook-triggered** routine that receives captures from the extension, judges relevance, summarizes, and files each item into the Content Library. It only classifies, summarizes, and files -- it never sends anything externally.
+The Town-side half of Send to Town. A **webhook-triggered** routine that receives captures from the extension, judges relevance, summarizes, and files each item into the Content Library. It only classifies, summarizes, and files -- it never sends anything externally.
 
 ## Trigger
 

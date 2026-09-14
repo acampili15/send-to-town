@@ -1,4 +1,4 @@
-# Send to Star
+# Send to Town
 
 A tiny browser extension that captures what you're reading -- a page, a highlight, or every open tab -- and sends it to your **Town** assistant, which classifies it, summarizes it, and files it into your Content Library. Capture happens in your logged-in browser session, so it works on content a server-side fetch can't reach (LinkedIn posts, gated articles).
 
@@ -26,14 +26,14 @@ skill/              Claude skill companion for iterating on this repo with a cod
 
 ## What's new in v4
 
-- **Send all open tabs** -- sweep an entire window to Star in one action (or with a keyboard shortcut).
+- **Send all open tabs** -- sweep an entire window to Town in one action (or with a keyboard shortcut).
 - **Collection routing** -- steer a capture into a specific Content Library collection, or leave it on Auto.
 - **Quick-action chips** -- one tap for Summarize / Read later / Add todo / Reference instead of typing.
 - **Keyboard shortcuts** -- Ctrl/Cmd+Shift+S (page), Ctrl/Cmd+Shift+E (all tabs); editable at chrome://extensions/shortcuts.
 - **Test connection** -- verify your webhook right from Settings.
 - **Neutral default icon, personalized to your Townie** -- ships with a generic save mark; each installer sets their own Townie as the toolbar button.
 - **Guided onboarding** -- a first-run wizard so anyone can set it up, not just the person who built it.
-- Richer metadata (author, publish date, canonical URL) and right-click **Send this link to Star**.
+- Richer metadata (author, publish date, canonical URL) and right-click **Send this link to Town**.
 
 ## Sharing it with other Town users
 

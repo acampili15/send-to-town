@@ -20,7 +20,7 @@ async function loadCollections() {
   const sel = document.getElementById("collection");
   const cfg = await chrome.storage.sync.get(["collections", "defaultCollection"]);
   const list = (Array.isArray(cfg.collections) && cfg.collections.length) ? cfg.collections : ["reading", "captures", "social", "personal"];
-  const opts = ['<option value="">Auto - let Star sort</option>'].concat(list.map((c) => '<option value="' + c + '">' + c + '</option>'));
+  const opts = ['<option value="">Auto - let Town sort</option>'].concat(list.map((c) => '<option value="' + c + '">' + c + '</option>'));
   sel.innerHTML = opts.join("");
   if (cfg.defaultCollection) sel.value = cfg.defaultCollection;
 }
@@ -33,8 +33,8 @@ async function capture(kind) {
   if (kind === "all") resp = await chrome.runtime.sendMessage({ type: "captureAll", note, collection });
   else resp = await chrome.runtime.sendMessage({ type: "capture", selectionOnly: kind === "selection", note, collection });
   if (resp && resp.ok) {
-    if (kind === "all") setStatus("Sent " + (resp.sent || 0) + " of " + (resp.total || 0) + " tabs to Star.", "ok");
-    else setStatus("Sent to Star.", "ok");
+    if (kind === "all") setStatus("Sent " + (resp.sent || 0) + " of " + (resp.total || 0) + " tabs to Town.", "ok");
+    else setStatus("Sent to Town.", "ok");
   } else {
     setStatus((resp && resp.error) || "Something went wrong.", "err");
   }

@@ -1,0 +1,22 @@
+# Secrets & local config -- never commit these
+.env
+.env.*
+*.local
+secrets.json
+config.local.json
+credentials.json
+
+# The webhook secret lives in the browser's extension storage at runtime,
+# never in this repo. Do not add it to any file here.
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Build artifacts
+*.zip
+dist/
+node_modules/

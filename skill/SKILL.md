@@ -1,9 +1,9 @@
 ---
-name: send-to-star
-description: Build and iterate on the "Send to Star" browser extension and its Town Web Capture Inbox processor routine. Use when editing the extension (manifest, background, popup, options, onboarding), changing the webhook payload contract, packaging the routine for other users, or coordinating the collector -> processor architecture.
+name: send-to-town
+description: Build and iterate on the "Send to Town" browser extension and its Town Web Capture Inbox processor routine. Use when editing the extension (manifest, background, popup, options, onboarding), changing the webhook payload contract, packaging the routine for other users, or coordinating the collector -> processor architecture.
 ---
 
-# Send to Star -- project companion
+# Send to Town -- project companion
 
 A Manifest V3 browser extension (the *collector*) plus a webhook-triggered Town routine (the *processor*). The extension captures a page / selection / all open tabs from the user's logged-in browser and POSTs a small JSON payload to the routine's webhook, which classifies, summarizes, and files each item into the Town Content Library.
 
@@ -20,7 +20,7 @@ Design principle from the original spec: **be loose upstream, smart downstream**
 - `popup.html` / `popup.js` -- quick-action chips, note field, "File into" collection select, three send buttons.
 - `options.html` / `options.js` -- webhook URL + secret, Test connection, collections list + default, Townie icon set/reset.
 - `onboarding.html` / `onboarding.js` -- first-run guided setup (opens on install). Reuses the same test/icon/save handlers.
-- `icons/` -- default Star icon set.
+- `icons/` -- default icon set.
 
 ## State (chrome.storage)
 

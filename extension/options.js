@@ -26,7 +26,7 @@ document.getElementById("test").addEventListener("click", async () => {
   const webhookSecret = document.getElementById("secret").value.trim();
   const t = document.getElementById("tested"); t.textContent = "Testing..."; t.className = "";
   const resp = await chrome.runtime.sendMessage({ type: "test", webhookUrl, webhookSecret });
-  if (resp && resp.ok) { t.textContent = "Connected - Star received the test ping."; t.className = "ok"; }
+  if (resp && resp.ok) { t.textContent = "Connected - Town received the test ping."; t.className = "ok"; }
   else { t.textContent = (resp && resp.error) || "Test failed."; t.className = "err"; }
 });
 

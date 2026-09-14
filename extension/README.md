@@ -1,4 +1,4 @@
-# Send to Star -- browser extension (v4)
+# Send to Town -- browser extension (v4)
 
 Capture the current page, your highlighted text, or every open tab and POST it to your Town **Web Capture Inbox** routine, which classifies, summarizes, and files it into your Content Library.
 
@@ -10,8 +10,8 @@ Capture the current page, your highlighted text, or every open tab and POST it t
 
 ## Using it
 
-- **Popup:** click the toolbar star. Tap quick-action chips, add a note, choose a collection, then **Send this page**, **Send highlighted text only**, or **Send all open tabs**.
-- **Right-click:** on a selection -> *Send selection to Star*; on a page -> *Send page to Star*; on a link -> *Send this link to Star*.
+- **Popup:** click the toolbar button. Tap quick-action chips, add a note, choose a collection, then **Send this page**, **Send highlighted text only**, or **Send all open tabs**.
+- **Right-click:** on a selection -> *Send selection to Town*; on a page -> *Send page to Town*; on a link -> *Send this link to Town*.
 - **Keyboard:** Ctrl/Cmd+Shift+S sends the page; Ctrl/Cmd+Shift+E sends all open tabs. Remap at `chrome://extensions/shortcuts`.
 
 A green **OK** badge means it went through; a red **ERR** (or **SET** if unconfigured) means it didn't -- open the popup for the reason.
