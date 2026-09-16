@@ -1,6 +1,7 @@
 # Changelog
 
 ## 4.1.0
+- Documented quick actions (the popup chips) in onboarding and SETUP.md: they are note presets the routine reads as filing hints -- stackable, and equivalent to typing the instruction into the note yourself.
 - Clearer collections guidance in onboarding, Settings, SETUP.md, and the setup skill: the list is a static, user-chosen set of popup shortcuts (not read from your library), Town always adds a type subfolder, and Auto files into captures/<type>.
 - Setup skill: make getting the extension package (clone or download ZIP from GitHub) an explicit first step, so a new browser or new user is never assumed to already have the files.
 - Renamed the developer companion skill folder `skill/` to `dev-skill/` so it is not confused with the end-user setup skill.

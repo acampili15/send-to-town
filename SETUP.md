@@ -139,6 +139,8 @@ In the setup guide (or the extension's **Settings**):
 - **Right-click:** a selection, a page, or a link, then **Send ... to Town**.
 - **Keyboard:** Ctrl/Cmd+Shift+S sends the page; Ctrl/Cmd+Shift+E sends all open tabs. Remap at `chrome://extensions/shortcuts`.
 
+**Quick actions** are the one-tap chips in the popup -- Summarize, Read later, Add todo, Reference. They are presets, not separate features: tapping them prepends a short instruction to your note (Summarize + Add todo sends the note `summarize; add a todo`), which the routine reads as a hint for how to handle the capture. Tap as many as you like, or skip the chips and type your own instruction in the note box. Note that "Add todo" records a checkbox line in your `capture-log`, not a separate Town task or reminder.
+
 Captures are classified, summarized, and filed into your Content Library (`captures/<type>`, or the collection you picked), with a running `capture-log`.
 
 ## Troubleshooting
