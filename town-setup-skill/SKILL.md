@@ -126,12 +126,17 @@ Ask the user to:
 
 Invite them to paste both back to you or keep them handy for the next step. Remind them the secret is sensitive and lives only in their extension, never in the repo.
 
-## Step 3 -- Load the extension (guide the user)
-These happen in the user's own browser, so you cannot do them -- give clear directions:
-1. Download or clone the repo (github.com/acampili15/send-to-town).
-2. Open chrome://extensions and turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select the **extension/** folder.
+## Step 3 -- Get the extension package, then load it (guide the user)
+The extension is not in the Chrome Web Store, so the user installs it unpacked from the project files. Do not assume they already have the files -- start every time by having them get the current package, even on a browser where they think they already have it (the code may have changed since):
+
+1. **Get the package** (either works):
+   - Clone it: `git clone https://github.com/acampili15/send-to-town` (or `git pull` in an existing clone to update), OR
+   - Download the ZIP: open github.com/acampili15/send-to-town, click the green **Code** button, choose **Download ZIP**, and unzip it.
+2. Open `chrome://extensions` (or the equivalent in Edge, Brave, or Arc) and turn on **Developer mode** (top right).
+3. Click **Load unpacked** and select the **extension/** folder inside the project.
 4. A setup guide opens automatically.
+
+Updating an existing install rather than adding a new browser? Have them pull the latest files and click **Reload** on the extension's card in chrome://extensions -- their saved webhook URL and secret carry over.
 
 ## Step 4 -- Connect and test (guide, then verify)
 In the extension's setup guide or **Settings**:
