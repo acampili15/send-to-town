@@ -26,8 +26,12 @@ document.getElementById("test").addEventListener("click", async () => {
   const webhookSecret = document.getElementById("secret").value.trim();
   const t = document.getElementById("tested"); t.textContent = "Testing..."; t.className = "";
   const resp = await chrome.runtime.sendMessage({ type: "test", webhookUrl, webhookSecret });
-  if (resp && resp.ok) { t.textContent = "Connected - Town received the test ping."; t.className = "ok"; }
-  else { t.textContent = (resp && resp.error) || "Test failed."; t.className = "err"; }
+  if (resp && resp.ok) {
+    const collections = parseCollections(document.getElementById("collections").value);
+    const defaultCollection = document.getElementById("defaultCollection").value.trim();
+    await chrome.storage.sync.set({ webhookUrl, webhookSecret, collections, defaultCollection });
+    t.textContent = "Connected - Town received the test ping. Saved."; t.className = "ok";
+  } else { t.textContent = (resp && resp.error) || "Test failed."; t.className = "err"; }
 });
 
 document.getElementById("applyIcon").addEventListener("click", async () => {

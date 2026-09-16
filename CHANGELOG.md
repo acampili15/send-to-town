@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.1
+- Auto-save on a successful Test: clicking Test now stores the webhook URL, secret, and collections when the ping succeeds, so a green test can no longer pass while captures use stale/empty saved values. Status now reads "Connected ... Saved."
+
 ## 4.1.0
 - Documented quick actions (the popup chips) in onboarding and SETUP.md: they are note presets the routine reads as filing hints -- stackable, and equivalent to typing the instruction into the note yourself.
 - Clearer collections guidance in onboarding, Settings, SETUP.md, and the setup skill: the list is a static, user-chosen set of popup shortcuts (not read from your library), Town always adds a type subfolder, and Auto files into captures/<type>.

@@ -15,8 +15,11 @@ document.getElementById("test").addEventListener("click", async () => {
   const webhookSecret = document.getElementById("secret").value.trim();
   const t = document.getElementById("tested"); t.textContent = "Testing..."; t.className = "status";
   const resp = await chrome.runtime.sendMessage({ type: "test", webhookUrl, webhookSecret });
-  if (resp && resp.ok) { t.textContent = "Connected."; t.className = "status ok"; }
-  else { t.textContent = (resp && resp.error) || "Test failed."; t.className = "status err"; }
+  if (resp && resp.ok) {
+    const collections = parseCollections(document.getElementById("collections").value);
+    await chrome.storage.sync.set({ webhookUrl, webhookSecret, collections });
+    t.textContent = "Connected and saved."; t.className = "status ok";
+  } else { t.textContent = (resp && resp.error) || "Test failed."; t.className = "status err"; }
 });
 
 document.getElementById("applyIcon").addEventListener("click", async () => {
