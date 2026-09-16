@@ -1,6 +1,7 @@
 # Changelog
 
 ## 4.1.0
+- Renamed the developer companion skill folder `skill/` to `dev-skill/` so it is not confused with the end-user setup skill.
 - Added a Town setup skill (town-setup-skill/): import it and your Townie creates the Web Capture Inbox routine, then guides you through the webhook, extension load, and test.
 - Added SETUP.md: a self-serve setup guide with the copy-paste routine prompt and step-by-step for the routine + extension.
 - Renamed the extension to "Send to Town" across the UI, code, and docs.

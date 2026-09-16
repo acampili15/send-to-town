@@ -18,7 +18,7 @@ extension/          The unpacked browser extension -- load THIS folder in Chrome
   onboarding.html/js First-run setup guide (opens automatically on install)
   icons/            Neutral default icon set (16/32/48/128 + 512 master)
 routine/            Spec + contract for the Town-side Web Capture Inbox processor routine
-skill/              Claude skill companion for iterating on this repo with a coding agent
+dev-skill/          Claude skill companion for iterating on the code with a coding agent
 town-setup-skill/   Town setup skill: import it and your Townie creates the routine + guides setup
 ```
 
