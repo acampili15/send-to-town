@@ -131,7 +131,7 @@ Copy the **Webhook URL** and the **Secret**. The secret is shown once -- keep it
 ## Part 4 -- Connect and personalize
 In the setup guide (or the extension's **Settings**):
 - Paste your **Webhook URL** and **Secret**, then click **Test connection** (green means it is working).
-- Set your **collections** (comma-separated) or keep the defaults.
+- Set your **collections** (comma-separated) or keep the defaults. These are just the shortcut labels in the popup's "File into" menu -- your own list, not a read of your library, so any name works (existing or new). Town always adds a type subfolder (reading / jobs / social / shopping / other) inside the collection you pick; leave a capture on **Auto** and it lands in `captures/<type>`. Optionally set a **Default selection** to pre-pick one.
 - Make the toolbar icon **your Townie**: open your Town assistant settings, save your Townie's image, and upload it (or paste its URL). The extension ships with a neutral default until you do.
 
 ## Part 5 -- Use it

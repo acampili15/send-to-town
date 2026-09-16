@@ -1,6 +1,7 @@
 # Changelog
 
 ## 4.1.0
+- Clearer collections guidance in onboarding, Settings, SETUP.md, and the setup skill: the list is a static, user-chosen set of popup shortcuts (not read from your library), Town always adds a type subfolder, and Auto files into captures/<type>.
 - Setup skill: make getting the extension package (clone or download ZIP from GitHub) an explicit first step, so a new browser or new user is never assumed to already have the files.
 - Renamed the developer companion skill folder `skill/` to `dev-skill/` so it is not confused with the end-user setup skill.
 - Added a Town setup skill (town-setup-skill/): import it and your Townie creates the Web Capture Inbox routine, then guides you through the webhook, extension load, and test.

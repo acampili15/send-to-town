@@ -141,7 +141,7 @@ Updating an existing install rather than adding a new browser? Have them pull th
 ## Step 4 -- Connect and test (guide, then verify)
 In the extension's setup guide or **Settings**:
 - Paste the **Webhook URL** and **Secret**, then click **Test connection**. Green means it is working.
-- Set collections (comma-separated) or keep the defaults.
+- Set their **collections** (comma-separated) or keep the defaults. Explain what these are: the shortcut labels shown in the popup's "File into" menu -- the user's own list, not a read of their Town library, so any name works (existing or new). Town always files into a type subfolder (reading / jobs / social / shopping / other) inside the chosen collection; a capture left on **Auto** lands in `captures/<type>`. A **Default selection** pre-picks one; blank keeps every capture on Auto.
 
 Once they have sent a test, verify from Town's side: check the routine's recent run history for a connection_test run to confirm the ping arrived. If none shows up, walk back through the URL and secret together.
 
