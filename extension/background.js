@@ -213,11 +213,60 @@ function resetIcon() {
   return chrome.action.setIcon({ path: { 16: "icons/icon-16.png", 32: "icons/icon-32.png", 48: "icons/icon-48.png", 128: "icons/icon-128.png" } });
 }
 
+// ---- context menus ----
+// Each capture target is a parent menu with a submenu of quick actions and
+// collections, so a right-click can carry context without opening the popup.
+// Note presets mirror the popup's quick-action chips (see popup.html data-tag).
+const QUICK_ACTIONS = [
+  { id: "summarize", label: "Summarize", note: "summarize" },
+  { id: "read-later", label: "Read later", note: "read later" },
+  { id: "todo", label: "Add todo", note: "add a todo" },
+  { id: "reference", label: "Reference", note: "save as reference" }
+];
+
+const MENU_TARGETS = [
+  { id: "selection", title: "Send selection to Town", contexts: ["selection"] },
+  { id: "page", title: "Send page to Town", contexts: ["page"] },
+  { id: "link", title: "Send this link to Town", contexts: ["link"] }
+];
+
+const DEFAULT_COLLECTIONS = ["reading", "captures", "social", "personal"];
+
+// Ids look like town|<target>|<kind>|<value>; a collection name may itself
+// contain "|", so the value is everything after the third separator.
+function menuId(target, kind, value) {
+  return ["town", target, kind, value].join("|");
+}
+
+function parseMenuId(rawId) {
+  const parts = String(rawId || "").split("|");
+  if (parts[0] !== "town" || parts.length < 4) return null;
+  return { target: parts[1], kind: parts[2], value: parts.slice(3).join("|") };
+}
+
+async function buildMenus() {
+  const cfg = await chrome.storage.sync.get(["collections"]);
+  const collections = (Array.isArray(cfg.collections) && cfg.collections.length) ? cfg.collections : DEFAULT_COLLECTIONS;
+  await chrome.contextMenus.removeAll();
+  for (const target of MENU_TARGETS) {
+    const contexts = target.contexts;
+    const parentId = menuId(target.id, "parent", "");
+    chrome.contextMenus.create({ id: parentId, title: target.title, contexts });
+    chrome.contextMenus.create({ id: menuId(target.id, "send", ""), parentId, title: "Send now", contexts });
+    chrome.contextMenus.create({ id: menuId(target.id, "sep", "actions"), parentId, type: "separator", contexts });
+    for (const action of QUICK_ACTIONS) {
+      chrome.contextMenus.create({ id: menuId(target.id, "action", action.id), parentId, title: action.label, contexts });
+    }
+    chrome.contextMenus.create({ id: menuId(target.id, "sep", "collections"), parentId, type: "separator", contexts });
+    for (const collection of collections) {
+      chrome.contextMenus.create({ id: menuId(target.id, "collection", collection), parentId, title: "File into: " + collection, contexts });
+    }
+  }
+}
+
 // ---- wiring ----
 chrome.runtime.onInstalled.addListener((details) => {
-  chrome.contextMenus.create({ id: "town-send-selection", title: "Send selection to Town", contexts: ["selection"] });
-  chrome.contextMenus.create({ id: "town-send-page", title: "Send page to Town", contexts: ["page"] });
-  chrome.contextMenus.create({ id: "town-send-link", title: "Send this link to Town", contexts: ["link"] });
+  buildMenus();
   applyTownieIcon();
   if (details && details.reason === "install") {
     chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
@@ -238,6 +287,8 @@ chrome.commands.onCommand.addListener((command) => {
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes.townieIconDataUrl) applyTownieIcon();
+  // Keep the "File into" submenu in step with the collections list in Settings.
+  if (area === "sync" && changes.collections) buildMenus();
 });
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {

@@ -11,7 +11,8 @@ Capture the current page, your highlighted text, or every open tab and POST it t
 ## Using it
 
 - **Popup:** click the toolbar button. Tap quick-action chips, add a note, choose a collection, then **Send this page**, **Send highlighted text only**, or **Send all open tabs**.
-- **Right-click:** on a selection -> *Send selection to Town*; on a page -> *Send page to Town*; on a link -> *Send this link to Town*.
+- **Right-click:** on a selection -> *Send selection to Town*; on a page -> *Send page to Town*; on a link -> *Send this link to Town*. Each opens a submenu so the capture can carry context without the popup: **Send now**, the same quick actions as the chips (Summarize / Read later / Add todo / Reference), and **File into: &lt;collection&gt;**. Send now and the quick actions use your default collection; an explicit *File into* overrides it.
+  - *Known next step:* a freeform note box injected at the selection, for typing context rather than picking a preset. Not built yet -- use the popup when you need to type a real note.
 - **Keyboard:** Ctrl/Cmd+Shift+S sends the page; Ctrl/Cmd+Shift+E sends all open tabs. Remap at `chrome://extensions/shortcuts`.
 
 A green **OK** badge means it went through; a red **ERR** (or **SET** if unconfigured) means it didn't -- open the popup for the reason.

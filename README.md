@@ -38,6 +38,7 @@ town-setup-skill/   Town setup skill: import it and your Townie creates the rout
 - **Neutral default icon, personalized to your Townie** -- ships with a generic save mark; each installer sets their own Townie as the toolbar button.
 - **Guided onboarding** -- a first-run wizard so anyone can set it up, not just the person who built it.
 - Richer metadata (author, publish date, canonical URL) and right-click **Send this link to Town**.
+- **Right-click submenus (v4.2)** -- highlight, right-click, and add context without the popup: **Send now**, the same quick actions as the chips, or **File into: &lt;collection&gt;**. *Known next step:* an in-page note box at the selection, for typing freeform context instead of picking a preset -- not built yet; use the popup when you need to type a real note.
 
 ## Sharing it with other Town users
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.0
+- Right-click captures can now carry context. Each context-menu entry (selection / page / link) is a parent with a submenu: **Send now**, the popup's quick actions (Summarize / Read later / Add todo / Reference) as note presets, and **File into: &lt;collection&gt;**. Previously a right-click sent with an empty note and Auto collection, so the only way to add context was the popup.
+- Send now and the quick actions inherit the default collection (matching how the popup pre-selects it); an explicit **File into** always wins.
+- The "File into" submenu rebuilds when the collections list changes in Settings, and menus are rebuilt on browser startup as well as install.
+- Documented an in-page note overlay at the selection (typed context rather than presets) as the known next step for the right-click path.
+
 ## 4.1.1
 - Auto-save on a successful Test: clicking Test now stores the webhook URL, secret, and collections when the ping succeeds, so a green test can no longer pass while captures use stale/empty saved values. Status now reads "Connected ... Saved."
 
