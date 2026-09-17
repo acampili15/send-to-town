@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Send to Town",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "Capture a page, your selection, or every open tab and send it to your Town assistant, which sorts it into your Content Library.",
   "permissions": ["activeTab", "scripting", "contextMenus", "storage"],
   "host_permissions": ["https://*/*"],

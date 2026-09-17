@@ -46,8 +46,9 @@ See `routine/web-capture-inbox.md`. Keep the extension and routine in lockstep w
 
 ## Roadmap / good next tasks
 
+- **In-page note overlay for right-click captures (known next step).** As of v4.2.0 the context menu carries context via a submenu of note presets (the popup's quick actions) and `File into: <collection>` entries -- see `buildMenus` / `parseMenuId` in `background.js`. Presets only; there is still no way to type freeform context without opening the popup. Next step is a small floating note box injected at the selection via `chrome.scripting.executeScript` (type a line, enter sends), which would work uniformly across browsers unlike `chrome.action.openPopup()`. Main cost is UI that survives hostile page CSS.
 - Offline queue + retry when a POST fails.
-- Recent-captures list in the popup.
+- Recent-captures list in the popup. Both this and the offline queue want the same foundation: a local capture log (last N sends) written to `chrome.storage.local` on each send, which the extension does not keep today.
 - Readability-based extraction; screenshot capture for dashboards.
 - Dwell/scroll heuristics with optional auto-capture.
 - Chrome Web Store packaging (privacy policy, host-permission justification).
