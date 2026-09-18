@@ -65,6 +65,12 @@ async function postToTown(cfg, data) {
   });
 }
 
+// `note` and `instruction` are both user-authored, but they are NOT the same
+// thing and must stay in separate fields. `note` is filing context the capture
+// routine reads; `instruction` is a directive the routine hands to the user's
+// assistant as a task. Merging them would make a populated note enough to
+// trigger real work, and would force the routine to guess intent. Everything
+// else here is page-derived and must never be treated as direction.
 function buildPayload(page, extra) {
   const e = extra || {};
   const selection = (e.selectionText || page.selection || "").trim();
@@ -81,6 +87,7 @@ function buildPayload(page, extra) {
     canonical: page.canonical,
     text: (e.selectionOnly && selection) ? "" : page.text,
     note: e.note || "",
+    instruction: e.instruction || "",
     collection: e.collection || "",
     capturedAt: new Date().toISOString()
   };
@@ -104,7 +111,7 @@ async function sendCapture(opts) {
 
   // Right-clicked link: send just the URL for Town to fetch server-side.
   if (options.linkUrl) {
-    const data = buildPayload(Object.assign({}, EMPTY_PAGE, { url: options.linkUrl }), { note: options.note, collection: options.collection });
+    const data = buildPayload(Object.assign({}, EMPTY_PAGE, { url: options.linkUrl }), { note: options.note, instruction: options.instruction, collection: options.collection });
     data.kind = "web_capture_link";
     try {
       const resp = await postToTown(cfg, data);
@@ -224,10 +231,12 @@ const QUICK_ACTIONS = [
   { id: "reference", label: "Reference", note: "save as reference" }
 ];
 
+// `ask` opens the in-page instruction box instead of sending immediately, so
+// it only makes sense where there is a page to act on (not on a bare link).
 const MENU_TARGETS = [
-  { id: "selection", title: "Send selection to Town", contexts: ["selection"] },
-  { id: "page", title: "Send page to Town", contexts: ["page"] },
-  { id: "link", title: "Send this link to Town", contexts: ["link"] }
+  { id: "selection", title: "Send selection to Town", contexts: ["selection"], ask: true },
+  { id: "page", title: "Send page to Town", contexts: ["page"], ask: true },
+  { id: "link", title: "Send this link to Town", contexts: ["link"], ask: false }
 ];
 
 const DEFAULT_COLLECTIONS = ["reading", "captures", "social", "personal"];
@@ -253,6 +262,9 @@ async function buildMenus() {
     const parentId = menuId(target.id, "parent", "");
     chrome.contextMenus.create({ id: parentId, title: target.title, contexts });
     chrome.contextMenus.create({ id: menuId(target.id, "send", ""), parentId, title: "Send now", contexts });
+    if (target.ask) {
+      chrome.contextMenus.create({ id: menuId(target.id, "ask", ""), parentId, title: "Ask Town to do something\u2026", contexts });
+    }
     chrome.contextMenus.create({ id: menuId(target.id, "sep", "actions"), parentId, type: "separator", contexts });
     for (const action of QUICK_ACTIONS) {
       chrome.contextMenus.create({ id: menuId(target.id, "action", action.id), parentId, title: action.label, contexts });
@@ -261,6 +273,27 @@ async function buildMenus() {
     for (const collection of collections) {
       chrome.contextMenus.create({ id: menuId(target.id, "collection", collection), parentId, title: "File into: " + collection, contexts });
     }
+  }
+}
+
+// Inject the instruction box into a tab. Idempotent on the page side: a second
+// injection focuses the box already open rather than stacking another one.
+async function openInstructionBox(tab) {
+  let target = tab;
+  if (!target || !target.id) {
+    const [active] = await chrome.tabs.query({ active: true, currentWindow: true });
+    target = active;
+  }
+  if (!target || !target.id || !/^https?:/.test(target.url || "")) {
+    await flashBadge("ERR", "#b91c1c");
+    return { ok: false, error: "This page can't be captured (not a normal web page)." };
+  }
+  try {
+    await chrome.scripting.executeScript({ target: { tabId: target.id }, files: ["instruction-overlay.js"] });
+    return { ok: true };
+  } catch (e) {
+    await flashBadge("ERR", "#b91c1c");
+    return { ok: false, error: "Couldn't open the instruction box here: " + e.message };
   }
 }
 
@@ -274,15 +307,42 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 chrome.runtime.onStartup.addListener(() => applyTownieIcon());
 
-chrome.contextMenus.onClicked.addListener((info) => {
-  if (info.menuItemId === "town-send-selection") sendCapture({ selectionOnly: true, selectionText: info.selectionText || "" });
-  else if (info.menuItemId === "town-send-page") sendCapture({ selectionOnly: false });
-  else if (info.menuItemId === "town-send-link") sendCapture({ linkUrl: info.linkUrl || "" });
+// v4.2 built structured menu ids (town|<target>|<kind>|<value>) but kept the
+// v4.1 flat-id handler, so no submenu item ever matched and every right-click
+// capture silently did nothing. Dispatch through parseMenuId instead.
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  const parsed = parseMenuId(info.menuItemId);
+  if (!parsed) return;
+  const { target, kind, value } = parsed;
+  if (kind === "parent" || kind === "sep") return;
+
+  if (kind === "ask") { await openInstructionBox(tab); return; }
+
+  // Send now and the quick actions inherit the default collection; an
+  // explicit "File into" always wins.
+  const cfg = await chrome.storage.sync.get(["defaultCollection"]);
+  const opts = { collection: cfg.defaultCollection || "" };
+  if (kind === "collection") opts.collection = value;
+  if (kind === "action") {
+    const action = QUICK_ACTIONS.find((a) => a.id === value);
+    if (action) opts.note = action.note;
+  }
+
+  if (target === "selection") {
+    opts.selectionOnly = true;
+    opts.selectionText = info.selectionText || "";
+  } else if (target === "link") {
+    opts.linkUrl = info.linkUrl || "";
+  } else {
+    opts.selectionOnly = false;
+  }
+  await sendCapture(opts);
 });
 
 chrome.commands.onCommand.addListener((command) => {
   if (command === "capture-page") sendCapture({ selectionOnly: false });
   else if (command === "capture-all-tabs") sendAllTabs({});
+  else if (command === "ask-town") openInstructionBox();
 });
 
 chrome.storage.onChanged.addListener((changes, area) => {
@@ -294,13 +354,28 @@ chrome.storage.onChanged.addListener((changes, area) => {
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (!msg) return;
   if (msg.type === "capture") {
-    sendCapture({ selectionOnly: msg.selectionOnly, note: msg.note, selectionText: msg.selectionText || "", collection: msg.collection || "" }).then(sendResponse);
+    sendCapture({ selectionOnly: msg.selectionOnly, note: msg.note, instruction: msg.instruction || "", selectionText: msg.selectionText || "", collection: msg.collection || "" }).then(sendResponse);
     return true;
   }
   if (msg.type === "captureAll") {
-    sendAllTabs({ note: msg.note, collection: msg.collection || "" }).then(sendResponse);
+    sendAllTabs({ note: msg.note, instruction: msg.instruction || "", collection: msg.collection || "" }).then(sendResponse);
     return true;
   }
+  // From the in-page instruction box. The page it was opened on is the
+  // capture, so it inherits the default collection like any other quick send.
+  if (msg.type === "askTown") {
+    (async () => {
+      const cfg = await chrome.storage.sync.get(["defaultCollection"]);
+      return sendCapture({
+        selectionOnly: false,
+        instruction: msg.instruction || "",
+        selectionText: msg.selectionText || "",
+        collection: cfg.defaultCollection || ""
+      });
+    })().then(sendResponse);
+    return true;
+  }
+  if (msg.type === "openInstructionBox") { openInstructionBox().then(sendResponse); return true; }
   if (msg.type === "test") { testConnection(msg).then(sendResponse); return true; }
   if (msg.type === "applyIcon") { applyTownieIcon().then(() => sendResponse({ ok: true })); return true; }
   if (msg.type === "resetIcon") { resetIcon().then(() => sendResponse({ ok: true })).catch(() => sendResponse({ ok: false })); return true; }

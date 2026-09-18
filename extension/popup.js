@@ -27,14 +27,15 @@ async function loadCollections() {
 
 async function capture(kind) {
   const note = composedNote();
+  const instruction = document.getElementById("instruction").value.trim();
   const collection = document.getElementById("collection").value;
   setStatus(kind === "all" ? "Sending your open tabs..." : "Sending...", "");
   let resp;
-  if (kind === "all") resp = await chrome.runtime.sendMessage({ type: "captureAll", note, collection });
-  else resp = await chrome.runtime.sendMessage({ type: "capture", selectionOnly: kind === "selection", note, collection });
+  if (kind === "all") resp = await chrome.runtime.sendMessage({ type: "captureAll", note, instruction, collection });
+  else resp = await chrome.runtime.sendMessage({ type: "capture", selectionOnly: kind === "selection", note, instruction, collection });
   if (resp && resp.ok) {
     if (kind === "all") setStatus("Sent " + (resp.sent || 0) + " of " + (resp.total || 0) + " tabs to Town.", "ok");
-    else setStatus("Sent to Town.", "ok");
+    else setStatus(instruction ? "Sent to Town. It'll pick this up as a task." : "Sent to Town.", "ok");
   } else {
     setStatus((resp && resp.error) || "Something went wrong.", "err");
   }

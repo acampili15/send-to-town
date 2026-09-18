@@ -27,7 +27,8 @@ X-Town-Idempotency-Key: <uuid>
     "published": "article:published_time, if any",
     "canonical": "canonical URL, if any",
     "text": "extracted main text (empty for selection-only or link captures)",
-    "note": "user note + any quick-action tags",
+    "note": "user note + any quick-action tags (filing context only)",
+    "instruction": "freeform instruction the user typed, usually empty",
     "collection": "target collection slug, or \"\" for Auto",
     "capturedAt": "ISO-8601",
     "batchId": "present on web_capture_batch items"
