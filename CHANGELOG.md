@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.1
+- Surface the v4.3 feature where people actually look. Settings gains an **Ask Town to do something** section (what it is, how to open it, notes vs instructions, and the ceiling on what a dispatched task may do) and a **Keyboard shortcuts** section listing all three bindings. Onboarding's final step covers the instruction box alongside the popup and right-click paths.
+- **Set keyboard shortcuts** button in both Settings and onboarding, opening `chrome://extensions/shortcuts` via `chrome.tabs.create` -- a plain link can't navigate to a `chrome://` URL, and a new command can arrive unassigned or collide with an existing browser binding, which looks like the feature is broken.
+- No functional change; docs and UI only.
+
 ## 4.3.0
 - **Ask Town from the page.** Ctrl/Cmd+Shift+K (or right-click -> **Ask Town to do something...**) opens a small box at your selection where you can type a freeform instruction -- "draft a reply asking about the storage fee" -- instead of picking a note preset. The popup gains a matching "Ask Town to do something" field. This completes the in-page box flagged as the known next step in 4.2.0.
 - **New `instruction` payload field, deliberately separate from `note`.** Both are user-typed, so the split is not about trust -- it is about intent and blast radius. `note` is filing context read by the capture routine and never causes work to happen; `instruction` is the explicit signal that the user wants something done, and is the only field that may direct action. Keeping them apart means a populated note can't trigger a task, and the routine never has to guess which one it is looking at.

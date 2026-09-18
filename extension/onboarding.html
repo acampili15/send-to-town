@@ -76,9 +76,19 @@
     <ul>
       <li>Click the toolbar button, add an optional note or quick-action, and hit <strong>Send this page</strong>.</li>
       <li>Highlight text and right-click &rarr; <strong>Send selection to Town</strong>.</li>
-      <li>Keyboard: <kbd>Ctrl/Cmd+Shift+S</kbd> sends the page, <kbd>Ctrl/Cmd+Shift+E</kbd> sends every open tab. Change these at <em>chrome://extensions/shortcuts</em>.</li>
+      <li>Ask your Townie to <em>do</em> something with a page: <kbd>Ctrl/Cmd+Shift+K</kbd>, or right-click &rarr; <strong>Ask Town to do something&hellip;</strong>.</li>
     </ul>
-    <p class="hint"><strong>Quick actions</strong> are one-tap presets in the popup (Summarize, Read later, Add todo, Reference). They just add a short instruction to your note &mdash; tapping Summarize and Add todo sends the note &ldquo;summarize; add a todo&rdquo; &mdash; which your Townie reads as a hint for how to file the capture. Tap as many as you like, or skip them and type your own instruction in the note box. (&ldquo;Add todo&rdquo; records a checkbox in your capture log, not a separate Town task.)</p>
+    <p class="hint"><strong>Keyboard shortcuts</strong></p>
+    <ul>
+      <li><kbd>Ctrl/Cmd+Shift+S</kbd> &mdash; send the current page</li>
+      <li><kbd>Ctrl/Cmd+Shift+E</kbd> &mdash; send every open tab</li>
+      <li><kbd>Ctrl/Cmd+Shift+K</kbd> &mdash; open the Ask Town box</li>
+    </ul>
+    <p class="hint">A new shortcut sometimes arrives unassigned, or collides with something your browser already owns. If one does nothing, set it here.</p>
+    <div><button id="openShortcuts" class="secondary">Set keyboard shortcuts</button></div>
+    <p class="hint" style="margin-top:16px;"><strong>Quick actions</strong> are one-tap presets in the popup (Summarize, Read later, Add todo, Reference). They just add a short hint to your note &mdash; tapping Summarize and Add todo sends the note &ldquo;summarize; add a todo&rdquo; &mdash; which your Townie reads as a hint for how to file the capture. Tap as many as you like, or type your own. (&ldquo;Add todo&rdquo; records a checkbox in your capture log, not a separate Town task.)</p>
+    <p class="hint"><strong>Notes vs instructions.</strong> A note is filing context &mdash; why you saved it, where it goes &mdash; and never makes anything happen. An <strong>instruction</strong> asks for real work: &ldquo;draft a reply asking about the storage fee&rdquo;. Type one in the Ask Town box or the popup&rsquo;s matching field, and Town files the capture as usual, then hands your instruction to a separate task that notifies you when it&rsquo;s done. Keeping the two apart is deliberate &mdash; page text can never turn itself into an instruction, so only what you type directs anything.</p>
+    <p class="hint">A task may draft emails (drafts only, for you to review), write documents, research, and hold time on your own calendar. It may not send email, message anyone, or do anything else visible outside your account &mdash; nothing reaches another person unless you click send.</p>
     <button id="finish">Save &amp; finish</button><span id="saved" class="status"></span>
   </div>
 

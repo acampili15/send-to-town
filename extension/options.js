@@ -58,4 +58,10 @@ document.getElementById("resetIcon").addEventListener("click", async () => {
   setTimeout(() => (t.textContent = ""), 2000);
 });
 
+// chrome:// URLs can't be navigated to from a link, but an extension page may
+// open one in a new tab.
+document.getElementById("openShortcuts").addEventListener("click", () => {
+  chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+});
+
 load();

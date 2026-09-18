@@ -16,6 +16,9 @@
     .icon-row { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
     .icon-preview { width: 48px; height: 48px; border: 1px solid #e2e8f0; border-radius: 8px; object-fit: contain; background: #fff; }
     .divider { border: 0; border-top: 1px solid #e2e8f0; margin: 26px 0; }
+    kbd { background: #f1f5f9; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; font-size: 12px; }
+    ul.shortcuts { margin: 6px 0; padding-left: 20px; color: #475569; font-size: 13px; }
+    ul.shortcuts li { margin: 4px 0; }
   </style>
 </head>
 <body>
@@ -35,6 +38,23 @@
   <label for="defaultCollection">Default selection</label>
   <input id="defaultCollection" type="text" placeholder="(blank = Auto)" />
   <p class="hint">Pre-selects this collection in the popup. Blank keeps every capture on Auto until you choose one.</p>
+
+  <hr class="divider" />
+  <label>Ask Town to do something</label>
+  <p class="hint">Beyond filing a capture, you can ask your Townie to act on it. Press <kbd>Ctrl/Cmd+Shift+K</kbd> on any page (or right-click &rarr; <strong>Ask Town to do something&hellip;</strong>) and a small box opens at your selection. Type something like &ldquo;draft a reply asking about the storage fee&rdquo;. The popup has a matching field.</p>
+  <p class="hint">Town files the capture as usual, then hands your instruction to a separate task, which shows up in Town and notifies you when it is done.</p>
+  <p class="hint"><strong>Notes and instructions are different.</strong> A <em>note</em> (and the quick-action chips) is filing context &mdash; why you saved it, where it goes. It never makes anything happen. An <em>instruction</em> asks for actual work. Keeping them apart is deliberate: page text can never turn itself into an instruction, so only what you type can direct anything.</p>
+  <p class="hint"><strong>What a task may do:</strong> draft emails (drafts only, left for you to review), write documents and notes, research, and hold time on your own calendar. <strong>What it may not do:</strong> send or reply to email, message anyone, RSVP, or anything else visible outside your account. Nothing reaches another person unless you click send. Instructions are skipped on all-tabs sweeps and logged in your capture log instead.</p>
+
+  <hr class="divider" />
+  <label>Keyboard shortcuts</label>
+  <ul class="shortcuts">
+    <li><kbd>Ctrl/Cmd+Shift+S</kbd> &mdash; send the current page</li>
+    <li><kbd>Ctrl/Cmd+Shift+E</kbd> &mdash; send every open tab</li>
+    <li><kbd>Ctrl/Cmd+Shift+K</kbd> &mdash; open the Ask Town box</li>
+  </ul>
+  <p class="hint">New shortcuts sometimes arrive unassigned, or collide with something your browser already owns. If one does nothing, set it here.</p>
+  <div><button id="openShortcuts" class="secondary">Set keyboard shortcuts</button></div>
 
   <hr class="divider" />
   <label>Your Townie icon</label>

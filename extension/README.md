@@ -29,6 +29,7 @@ A green **OK** badge means it went through; a red **ERR** (or **SET** if unconfi
 ## Settings
 
 - **Webhook URL / Secret** -- from the routine. **Test connection** fires a harmless ping.
+- **Ask Town / Keyboard shortcuts** -- a reference for the instruction box and all three bindings, plus a **Set keyboard shortcuts** button that opens `chrome://extensions/shortcuts` (a plain link can't navigate to a `chrome://` URL).
 - **Collections** -- comma-separated list shown in the popup's "File into" menu. A default selection is optional.
 - **Your Townie icon** -- the extension ships with a neutral default icon. To use your own: open your [Town assistant settings](https://www.town.com/settings/assistant/personality), save your Townie's image, and upload it here (or paste its URL). **Reset to default** restores the neutral icon.
 

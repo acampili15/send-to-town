@@ -46,4 +46,10 @@ document.getElementById("finish").addEventListener("click", async () => {
   const s = document.getElementById("saved"); s.textContent = "Saved. You're ready to capture."; s.className = "status ok";
 });
 
+// chrome:// URLs can't be navigated to from a link, but an extension page may
+// open one in a new tab.
+document.getElementById("openShortcuts").addEventListener("click", () => {
+  chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+});
+
 load();
