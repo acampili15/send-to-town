@@ -38,7 +38,8 @@ town-setup-skill/   Town setup skill: import it and your Townie creates the rout
 - **Neutral default icon, personalized to your Townie** -- ships with a generic save mark; each installer sets their own Townie as the toolbar button.
 - **Guided onboarding** -- a first-run wizard so anyone can set it up, not just the person who built it.
 - Richer metadata (author, publish date, canonical URL) and right-click **Send this link to Town**.
-- **Right-click submenus (v4.2)** -- highlight, right-click, and add context without the popup: **Send now**, the same quick actions as the chips, or **File into: &lt;collection&gt;**. *Known next step:* an in-page note box at the selection, for typing freeform context instead of picking a preset -- not built yet; use the popup when you need to type a real note.
+- **Right-click submenus (v4.2)** -- highlight, right-click, and add context without the popup: **Send now**, the same quick actions as the chips, or **File into: &lt;collection&gt;**.
+- **Ask Town, from the page (v4.3)** -- Ctrl/Cmd+Shift+K opens a small box at your selection. Type what you want done ("draft a reply asking about the storage fee") and Town files the capture as usual, then picks the instruction up as a task. Drafts, docs, research, and holds on your own calendar only -- it never sends anything to anyone.
 
 ## Sharing it with other Town users
 

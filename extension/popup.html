@@ -17,6 +17,7 @@
     .secondary { background: #eef2f7; color: #111; }
     .ghost { background: #fff; color: #2563eb; border: 1px solid #dbeafe; }
     #status { min-height: 16px; font-size: 12px; margin-top: 8px; }
+    .sub { font-size: 10.5px; color: #94a3b8; margin-top: 3px; line-height: 1.3; }
     .ok { color: #15803d; } .err { color: #b91c1c; }
     .row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
     a { font-size: 12px; color: #2563eb; text-decoration: none; }
@@ -35,6 +36,10 @@
 
   <label>Note (optional)</label>
   <textarea id="note" placeholder="Anything to tell Town..."></textarea>
+
+  <label>Ask Town to do something (optional)</label>
+  <textarea id="instruction" placeholder="e.g. draft a reply asking about the storage fee"></textarea>
+  <div class="sub">Creates a task in Town. Drafts and prep only &mdash; nothing is sent for you.</div>
 
   <label>File into</label>
   <select id="collection"></select>
